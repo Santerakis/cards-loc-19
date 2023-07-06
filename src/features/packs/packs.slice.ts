@@ -41,13 +41,14 @@ const removePack = createAppAsyncThunk<{ packId: string }, string>(
     }
 );
 
-const updatePack = createAppAsyncThunk<void, PackType>(
+const updatePack = createAppAsyncThunk<{pack: PackType}, PackType>(
     "packs/updatePack",
     async (arg, thunkAPI) => {
         const {dispatch} = thunkAPI;
         return thunkTryCatch(thunkAPI, async () => {
-            await packsApi.updatePack(arg);
-            dispatch(fetchPacks());
+            const res = await packsApi.updatePack(arg);
+            return {pack: res.data.updatedCardsPack}
+            // dispatch(fetchPacks());
         });
     }
 );
@@ -62,7 +63,11 @@ const slice = createSlice({
         minCardsCount: 0,
         maxCardsCount: 100,
     },
-    reducers: {},
+    reducers: {
+        allInitialState: (state, action) => {
+            return action.payload  //заменит весть initialState
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchPacks.fulfilled, (state, action) => {
@@ -78,15 +83,19 @@ const slice = createSlice({
                 state.cardPacks.unshift(action.payload.pack);
             })
             .addCase(removePack.fulfilled, (state, action) => {
-                const newState = state.cardPacks.filter((pack) => {
+                const newPacks = state.cardPacks.filter((pack) => {
                     return pack._id !== action.payload.packId;
                 });
-                state.cardPacks = newState;
+                state.cardPacks = newPacks;
             })
             // .addCase(removePack.fulfilled, (state, action) => {
             //     const index = state.cardPacks.findIndex((pack) => pack._id === action.payload.packId);
             //     if (index !== -1) state.cardPacks.splice(index, 1);
-            // })
+            // })  прирывается при первом совпадении, filter весь массив переберет
+            .addCase(updatePack.fulfilled, (state, action) => {
+                const index = state.cardPacks.findIndex((pack) => pack._id === action.payload.pack._id);
+                if (index !== -1) state.cardPacks[index] = action.payload.pack;
+            });
 
     },
 });
