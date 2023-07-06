@@ -15,7 +15,7 @@ const fetchPacks = createAppAsyncThunk<{ packsPage: FetchPacksResponseType },
     });
 });
 
-const createPack = createAppAsyncThunk<{pack: PackType}, ArgCreatePackType>(
+const createPack = createAppAsyncThunk<{ pack: PackType }, ArgCreatePackType>(
     "packs/createPack",
     async (arg, thunkAPI) => {
         const {dispatch} = thunkAPI;
@@ -28,13 +28,15 @@ const createPack = createAppAsyncThunk<{pack: PackType}, ArgCreatePackType>(
     }
 );
 
-const removePack = createAppAsyncThunk<void, string>(
+const removePack = createAppAsyncThunk<{ packId: string }, string>(
     "packs/removePack",
     async (id, thunkAPI) => {
         const {dispatch} = thunkAPI;
         return thunkTryCatch(thunkAPI, async () => {
-            await packsApi.removePack(id);
-            dispatch(fetchPacks());
+            const res = await packsApi.removePack(id);
+            // return { packId: res.data.deletedCardsPack._id };
+            return {packId: id}
+            // dispatch(fetchPacks());
         });
     }
 );
@@ -74,7 +76,18 @@ const slice = createSlice({
             })
             .addCase(createPack.fulfilled, (state, action) => {
                 state.cardPacks.unshift(action.payload.pack);
-            });
+            })
+            .addCase(removePack.fulfilled, (state, action) => {
+                const newState = state.cardPacks.filter((pack) => {
+                    return pack._id !== action.payload.packId;
+                });
+                state.cardPacks = newState;
+            })
+            // .addCase(removePack.fulfilled, (state, action) => {
+            //     const index = state.cardPacks.findIndex((pack) => pack._id === action.payload.packId);
+            //     if (index !== -1) state.cardPacks.splice(index, 1);
+            // })
+
     },
 });
 
