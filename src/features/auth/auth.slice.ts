@@ -20,6 +20,21 @@ const slice = createSlice({
   },
 });
 
+// объект с неперезаписываемыми (readonly) полями, но не рекомендуется
+// для избегания magic number-ов
+enum ResultCode {
+    Success = 0,
+    Error = 1,
+    Captcha = 10,
+}
+
+// то же, но лучне так
+export const ResultCode2 = {
+    success: 0,
+    error: 1,
+    captcha: 10
+} as const
+
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>(
   "auth/login",
   async (arg, thunkAPI) => {
