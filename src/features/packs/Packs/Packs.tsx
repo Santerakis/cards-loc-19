@@ -3,9 +3,10 @@ import { useAppDispatch, useAppSelector } from "common/hooks";
 import { packsThunks } from "features/packs/packs.slice";
 import s from "./styles.module.css";
 import { PackType } from "features/packs/packs.api";
+import {filteredByNamePacksSelector, selectCardPacks} from "../packsSelectors";
 
 export const Packs = () => {
-  const cardPacks = useAppSelector((state) => state.packs.cardPacks);
+  const cardPacks = useAppSelector(filteredByNamePacksSelector);
 
   const dispatch = useAppDispatch();
 
