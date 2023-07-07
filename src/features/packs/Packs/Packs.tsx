@@ -7,8 +7,8 @@ import {filteredByNamePacksSelector, selectCardPacks} from "../packsSelectors";
 import {useActions} from "../../../common/hooks/useActions";
 
 export const Packs = () => {
-  // const cardPacks = useAppSelector(selectCardPacks);
-  const cardPacks = useAppSelector(filteredByNamePacksSelector);
+  const cardPacks = useAppSelector(selectCardPacks);
+  // const cardPacks = useAppSelector(filteredByNamePacksSelector);
   const { fetchPacks, removePack, createPack, updatePack } = useActions(packsThunks);
 
   const dispatch = useAppDispatch();
