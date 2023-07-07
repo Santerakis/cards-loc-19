@@ -2,6 +2,7 @@ import {RootState} from "../../app/store";
 import {createSelector} from "@reduxjs/toolkit";
 
 // сложные селекторы, это селекторы в которых  мы делаем сортировку / фильтрацию или сложные вычисления
+// если бэк не обрабатывает, через квери параметры
 
 export const selectCardPacks = (state: RootState) => state.packs.cardPacks
 export const selectPage = (state: RootState) => state.packs.page
