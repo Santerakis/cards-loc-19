@@ -1,8 +1,10 @@
 import LinearProgress from "@mui/material/LinearProgress";
 import { useAppSelector } from "common/hooks";
+import {selectApp, selectIsLoading} from "./appSelectors";
 
 function App() {
-  const isLoading = useAppSelector((state) => state.app.isLoading);
+  const isLoading = useAppSelector(selectApp.selectIsLoading);
+  const isAppInitialized = useAppSelector(selectApp.selectIsAppInitialized);
 
   // const dispatch = useAppDispatch();
 
