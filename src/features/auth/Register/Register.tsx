@@ -2,13 +2,17 @@ import { authThunks } from "features/auth/auth.slice";
 import s from "features/auth/Register/styles.module.css";
 import { useAppDispatch } from "common/hooks";
 import { useEffect } from "react";
-import { unHandleAction } from "common/actions/unhandle.action";
+import {commonActions} from "common/actions/unhandle.action";
+import {useActions} from "../../../common/hooks/useActions";
 
 export const Register = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const {register, unHandleAction} = useActions({...authThunks, ...commonActions})
+  // задиспатченные экшены (экшены, асик-экшены(санки))
 
   useEffect(() => {
-    dispatch(unHandleAction());
+    // dispatch(unHandleAction());
+    unHandleAction()
   }, []);
 
   const registerHandler = () => {
@@ -16,7 +20,8 @@ export const Register = () => {
       email: "safrondev2@gmail.com",
       password: "12345678",
     };
-    dispatch(authThunks.register(payload));
+    // dispatch(authThunks.register(payload));
+    register(payload)
   };
 
   return (

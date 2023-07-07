@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f478b9c-674f-4899-9f06-36fd651b6770" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/common/hooks/useActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/packs/Packs/Packs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/packs/Packs/Packs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/packs/packsSelectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/packs/packsSelectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/Register/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/Register/Register.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +54,7 @@
       <workItem from="1688739946285" duration="220000" />
       <workItem from="1688740671723" duration="213000" />
       <workItem from="1688745513679" duration="153000" />
-      <workItem from="1688745681898" duration="6750000" />
+      <workItem from="1688745681898" duration="7411000" />
     </task>
     <servers />
   </component>
